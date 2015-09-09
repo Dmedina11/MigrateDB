@@ -1,0 +1,26 @@
+Ejecución de Scripts
+
+1. Crear un archivo con la información de las conexiones tal como sigue el formato:
+
+host;basedatos_import;usuario;clave
+host;basedatos_export;usuario;clave
+
+2. Ejecutar script HandlerMigrateData.py:
+
+python HandlerMigrateData.py /path_csv/archivocsv_macs /path_data_conexion/data_conexion
+
+Script ejecutará todos los pasos:
+
+	1. Obtención de las macs del csv (GetMacs.py)
+	2. Completar información de las tablas no relacionadas (CompleteTables.py)
+	3. Ingresar información de usuarios, equipos y macs (NewInsertTables.py)
+	4. Eliminar y generar archivos con equipos conflictivos (RemoveElementsConflictiv.py)
+	5. Generar Lista de usuarios en base de datos import que no existen en el csv (GenerateListUser.py)
+
+Consideraciones:
+	
+	-Se requiere tener instalado el módulo de python psycopg2
+	-Los scripts deben encontrarse en el mismo directorio (todos)
+	-No eliminar los archivos relacionados a progressbar
+	-Se crea un directorio al mismo nivel que los scripts (FilesOutput) en donde se almacenan todos los archivos
+	de salida de los scripts.
